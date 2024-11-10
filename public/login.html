@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup and Signin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+    }
+    .container {
+      width: 300px;
+      padding: 20px;
+      margin: 10px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="signup-container">
+  <h2>Signup</h2>
+  <div class="form-group">
+    <label for="signup-firstName">First Name</label>
+    <input type="text" id="signup-firstName" required>
+  </div>
+  <div class="form-group">
+    <label for="signup-lastName">Last Name</label>
+    <input type="text" id="signup-lastName" required>
+  </div>
+  <div class="form-group">
+    <label for="signup-email">Email</label>
+    <input type="email" id="signup-email" required>
+  </div>
+  <div class="form-group">
+    <label for="signup-password">Password</label>
+    <input type="password" id="signup-password" required>
+  </div>
+  <button onclick="signup()">Signup</button>
+  <div class="message" id="signup-message"></div>
+</div>
+
+<div class="container" id="signin-container">
+  <h2>Signin</h2>
+  <div class="form-group">
+    <label for="signin-email">Email</label>
+    <input type="email" id="signin-email" required>
+  </div>
+  <div class="form-group">
+    <label for="signin-password">Password</label>
+    <input type="password" id="signin-password" required>
+  </div>
+  <button onclick="signin()">Signin</button>
+  <div class="message" id="signin-message"></div>
+</div>
+
+<script>
+  async function signup() {
+    const firstName = document.getElementById('signup-firstName').value;
+    const lastName = document.getElementById('signup-lastName').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+
+    try {
+      const response = await fetch('/api/v1/user/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName, lastName, email, password })
+      });
+      const data = await response.json();
+      const messageElement = document.getElementById('signup-message');
+      if (response.ok) {
+        messageElement.style.color = 'green';
+        messageElement.textContent = data.msg;
+      } else {
+        messageElement.style.color = 'red';
+        messageElement.textContent = data.errors ? data.errors.map(e => e.message).join(', ') : data.msg;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  async function signin() {
+    const email = document.getElementById('signin-email').value;
+    const password = document.getElementById('signin-password').value;
+
+    try {
+      const response = await fetch('/api/v1/user/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      const messageElement = document.getElementById('signin-message');
+      if (response.ok) {
+        messageElement.style.color = 'green';
+        messageElement.textContent = 'Signin successful!';
+        localStorage.setItem('token', data.token); // Store JWT token for further requests
+      } else {
+        messageElement.style.color = 'red';
+        messageElement.textContent = data.message || 'Signin failed';
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+</script>
+
+</body>
+</html>

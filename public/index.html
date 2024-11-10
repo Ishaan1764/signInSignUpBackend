@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transit UI</title>
+  <style>
+    /* Reset some default styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .navbar .btn {
+      background-color: #fbbf24;
+      padding: 8px 16px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Main content styling */
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    /* Trip planner styling */
+    .trip-planner {
+      background-color: #2563eb;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 30%;
+    }
+    .trip-planner h2 {
+      margin-bottom: 15px;
+    }
+    .trip-planner label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    .trip-planner input, .trip-planner select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    .trip-planner button {
+      width: 100%;
+      padding: 10px;
+      background-color: #fbbf24;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Banner section styling */
+    .banner {
+      background-color: #6b21a8;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      flex-grow: 1;
+      text-align: center;
+    }
+    .banner h2 {
+      margin-bottom: 10px;
+    }
+    .banner button {
+      padding: 10px 20px;
+      background-color: #fbbf24;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Footer styling */
+    .footer {
+      background-color: #111827;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #fbbf24;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div><strong>York Region Transit</strong></div>
+    <div>
+      <a href="#">Schedules and Maps</a>
+      <a href="#">Fares and Passes</a>
+      <a href="#">Travelling with Us</a>
+      <a href="#">About Us</a>
+    </div>
+    <button class="btn">Service Advisories</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Trip Planner Section -->
+    <div class="trip-planner">
+      <h2>Trip Planner</h2>
+      <label for="from">From</label>
+      <input type="text" id="from" placeholder="Enter origin">
+
+      <label for="to">To</label>
+      <input type="text" id="to" placeholder="Enter destination">
+
+      <label for="travel-mode">Travel Mode</label>
+      <select id="travel-mode">
+        <option>Leave at</option>
+        <option>Arrive by</option>
+      </select>
+
+      <label for="time">Time</label>
+      <input type="time" id="time">
+
+      <label for="date">Date</label>
+      <input type="date" id="date">
+
+      <button>Plan My Trip</button>
+    </div>
+
+    <!-- Banner Section -->
+    <div class="banner">
+      <h2>PRESTO in Apple Wallet</h2>
+      <p>With PRESTO in Apple Wallet, you can tap your iPhone or Apple Watch to pay for transit!</p>
+      <button>Learn more</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    This website uses cookies to enhance usability and provide a more personal experience. 
+    <a href="#">Privacy Policy</a>
+  </div>
+
+</body>
+</html>
